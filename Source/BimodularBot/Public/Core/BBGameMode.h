@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// ©FIT Team
 
 #pragma once
 
@@ -13,5 +13,8 @@ UCLASS()
 class BIMODULARBOT_API ABBGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+public:
+	ABBGameMode();
+protected:
+	virtual void BeginPlay() override;
 };
