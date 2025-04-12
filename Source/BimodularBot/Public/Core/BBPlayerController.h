@@ -13,5 +13,5 @@ UCLASS()
 class BIMODULARBOT_API ABBPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+
 };
