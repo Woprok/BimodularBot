@@ -75,3 +75,6 @@ DerivedDataCache/*
 
 # Autogeneerated files
 UpgradeLog.htm
+
+# Enc
+enc_temp_folder/*
