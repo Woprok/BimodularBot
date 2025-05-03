@@ -13,32 +13,41 @@ TObjectPtr<UBBGameInstance> UBBGameInstance::Get(TObjectPtr<UWorld> world)
 	return CastChecked<UBBGameInstance>(gameInstance);
 }
 
-void UBBGameInstance::RegisterExistingLocalPlayer(ABBPlayerController* player)
+void UBBGameInstance::RegisterFirstSplitscreenPlayer(ABBPlayerController* player)
 {
-	firstPlayer = player;
+	FirstSplitscreenPlayer = player;
 }
-
-void UBBGameInstance::RegisterNewLocalPlayer(const ABBGameMode* gamemode)
+void UBBGameInstance::RegisterSecondSplitscreenPlayer(ABBPlayerController* player)
 {
-	secondPlayer = Cast<ABBPlayerController>(UGameplayStatics::CreatePlayer(gamemode));
+	SecondSplitscreenPlayer = player;
 }
 
 void UBBGameInstance::DestroyLocalPlayers()
 {
-	if (IsValid(secondPlayer))
-		UGameplayStatics::RemovePlayer(secondPlayer, true);
-	secondPlayer = nullptr;
-	firstPlayer = nullptr;
+	if (IsValid(SecondSplitscreenPlayer))
+		UGameplayStatics::RemovePlayer(SecondSplitscreenPlayer, true);
+	FirstSplitscreenPlayer = nullptr;
+	SecondSplitscreenPlayer = nullptr;
 }
 
-ABBPlayerController* UBBGameInstance::GetFirstLocalPlayer()
+ABBPlayerController* UBBGameInstance::GetFirstSplitscreenPlayer()
 {
-	return firstPlayer;
+	return FirstSplitscreenPlayer;
 }
 
-ABBPlayerController* UBBGameInstance::GetSecondLocalPlayer()
+ABBPlayerController* UBBGameInstance::GetSecondSplitscreenPlayer()
 {
-	return secondPlayer;
+	return SecondSplitscreenPlayer;
+}
+
+bool UBBGameInstance::IsFirstSplitscreenPlayer(ABBPlayerController* player)
+{
+	return FirstSplitscreenPlayer == player;
+}
+
+bool UBBGameInstance::IsSecondSplitscreenPlayer(ABBPlayerController* player)
+{
+	return SecondSplitscreenPlayer == player;
 }
 
 void UBBGameInstance::Quit()
