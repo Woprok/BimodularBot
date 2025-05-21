@@ -28,19 +28,23 @@ void ABBGameMode::PostLogin(APlayerController* NewPlayer)
 		return;
 
 	// Simply assign unique value to each player, so we have full control and double checking what is being done.
-
+	FString errorOutput;
 	if (FirstSplitscreenPlayer == nullptr)
 	{
 		FirstSplitscreenPlayer = playerController;
 		playerController->SetSplitScreenPlayer(EBBSplitScreenPlayer::FirstPlayer);
 		UBBGameInstance::Get(GetWorld())->RegisterFirstSplitscreenPlayer(playerController);
+		UpdatePlayerStartSpot(playerController, FirstPlayerSpawnName, errorOutput);
 	}
 	else if (SecondSplitscreenPlayer == nullptr)
 	{
 		SecondSplitscreenPlayer = playerController;
 		playerController->SetSplitScreenPlayer(EBBSplitScreenPlayer::SecondPlayer);
 		UBBGameInstance::Get(GetWorld())->RegisterSecondSplitscreenPlayer(playerController);
+		UpdatePlayerStartSpot(playerController, SecondPlayerSpawnName, errorOutput);
 	}
+
+	UE_LOG(BimodularBotLog, Error, TEXT("No error should be detected: %s."), *errorOutput);
 
 	Super::PostLogin(NewPlayer);
 }

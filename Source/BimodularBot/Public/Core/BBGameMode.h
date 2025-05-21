@@ -38,6 +38,12 @@ public:
 	/** Get first player */
 	UFUNCTION(BlueprintCallable, Category = "CORE")
 	ABBPlayerController* GetSecondSplitScreenPlayer() { return SecondSplitscreenPlayer; };
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "CORE", meta = (AllowPrivateAccess = "true"))
+	FString FirstPlayerSpawnName;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "CORE", meta = (AllowPrivateAccess = "true"))
+	FString SecondPlayerSpawnName;
 protected:
 	virtual void BeginPlay() override;
 	virtual void CreateLocalPlayer();
